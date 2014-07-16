@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02 Attributes</title>
+    <link href="../shared/ui.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .dynamicClass {
+            color: #374bd3;
+            border: solid 1px #374bd3;
+            padding: 10px;
+            margin: 15px;
+            -webkit-box-shadow: 0px 0px 3px 5px #f2e1f2;
+            -moz-box-shadow: 0px 0px 3px 5px #f2e1f2;
+            -ms-box-shadow: 0px 0px 3px 5px #f2e1f2;
+            box-shadow: 0px 0px 3px 5px #f2e1f2;
+        }
+    </style>
+</head>
+    <body>
+        
+        <div data-bind="___ : textProperty"></div>
+        <div data-bind="___ : htmlProperty"></div>
+        <div data-bind="___ : cssClassProperty">Dynamic Css Div</div>
+        <div data-bind="___ : {color : fontcolor}">Colored Text</div>
+
+        <script src="../shared/knockout-3.1.0.js"></script>
+        <script>
+            var ViewModel = function () {
+                var self = this;
+
+                self.textProperty = ko.observable("Text Value <br />");
+                self.htmlProperty = ko.observable("Html <b>Value</b> <br />");
+                self.cssClassProperty = ko.observable("dynamicClass");
+                self.fontcolor = ko.observable('#374bd3');
+
+                return self;
+            };
+
+            ko.applyBindings(new ViewModel());
+        </script>
+
+
+
+    </body>
+</html>

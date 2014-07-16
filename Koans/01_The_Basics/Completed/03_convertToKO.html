@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>03 Attributes</title>
+    <title>03 Convert To KO</title>
     <link href="../shared/ui.css" rel="stylesheet" />
 
     <style type="text/css">
@@ -19,18 +19,14 @@
 </head>
     <body>
         
-        <div data-bind="___ : textProperty"></div>
-        <div data-bind="___ : htmlProperty"></div>
-        <div data-bind="___ : cssClassProperty">Dynamic Css Div</div>
-        <div data-bind="___ : {color : fontcolor}">Colored Text</div>
+        <div data-bind="text : textProperty, css :cssClassProperty, style : {color : fontcolor}"></div>
 
         <script src="../shared/knockout-3.1.0.js"></script>
         <script>
             var ViewModel = function () {
                 var self = this;
 
-                self.textProperty = ko.observable("Text Value <br />");
-                self.htmlProperty = ko.observable("Html <b>Value</b> <br />");
+                self.textProperty = ko.observable("The Better Way");
                 self.cssClassProperty = ko.observable("dynamicClass");
                 self.fontcolor = ko.observable('#374bd3');
 

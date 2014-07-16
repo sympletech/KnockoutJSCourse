@@ -1,14 +1,14 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>02 Realtime Bindings</title>
+    <title>01 Realtime Bindings</title>
     <link href="../shared/ui.css" rel="stylesheet" />
 </head>
 <body>
 
-    <input type="text" data-bind="value:boundProperty" />
+    <input type="text" data-bind="value:___" />
     <div>
-        <label>Input Box Value :</label> <span data-bind="html:boundProperty"></span>
+        <label>Input Box Value :</label> <span data-bind="html:___"></span>
     </div>
 
     <script src="../shared/knockout-3.1.0.js"></script>
@@ -21,7 +21,7 @@
             return self;
         };
 
-        ko.applyBindings(new ViewModel());
+        ko.applyBindings(new ___);
     </script>
 
 
