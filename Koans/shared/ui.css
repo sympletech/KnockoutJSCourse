@@ -42,66 +42,59 @@ body {
     animation-delay: 0s, 1s;
 }
 
+/********************************
+    Animations
+********************************/
+
+/*Bounce Logo 1*/
 @keyframes bounceLogo1 {
     from { background-position: 2000px 0; }
     to {background-position: -25px 0;}
 }
-
 @-webkit-keyframes bounceLogo1 {
     from { background-position: 2000px 0; }
     to {background-position: -25px 0;}
 }
-
 @-moz-keyframes bounceLogo1 {
     from { background-position: 2000px 0; }
     to {background-position: -25px 0;}
 }
-
+/*Bounce Logo 2*/
 @keyframes bounceLogo2 {
     from { background-position: -25px 0; }
     to {background-position: 0 0;}
 }
-
 @-webkit-keyframes bounceLogo2 {
     from { background-position: -25px 0; }
     to {background-position: 0 0;}
 }
-
 @-moz-keyframes bounceLogo2 {
     from { background-position: -25px 0; }
     to {background-position: 0 0;}
 }
-
-
-
+/*Open Window 1*/
 @keyframes openWindow1 {
     from { bottom: 1000px;}
     to { bottom: 0;}
 }
-
 @-webkit-keyframes openWindow1 {
     from { bottom: 1000px;}
     to { bottom: 0;}
 }
-
 @-moz-keyframes openWindow1 {
     from { bottom: 1000px;}
     to { bottom: 0;}
 }
-
+/*Open Window 2*/
 @keyframes openWindow2 {
     from { bottom: 0;}
     to { bottom: 25px;}
 }
-
 @-webkit-keyframes openWindow2 {
     from { bottom: 0;}
     to { bottom: 25px;}
 }
-
 @-moz-keyframes openWindow2 {
     from { bottom: 0;}
     to { bottom: 25px;}
 }
-
-
