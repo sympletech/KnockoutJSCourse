@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>03 Select Lists</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <select data-bind="options:choices, value:selectedChoice"></select>
+    <div>
+        <label>Selected Value : </label> <span data-bind="text:selectedChoice"></span>
+    </div>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.choices = ko.observableArray(["First", "Second", "Third"]);
+            self.selectedChoice = ko.observable();
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>
