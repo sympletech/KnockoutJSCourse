@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01 Introduction To Data Bindings</title>
+    <link href="../shared/ui.css" rel="stylesheet" />
+
+</head>
+<body>
+    
+    <div data-bind="html:boundProperty"></div>
+
+
+    <script src="../shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.boundProperty = ko.observable('Any Value');
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>
