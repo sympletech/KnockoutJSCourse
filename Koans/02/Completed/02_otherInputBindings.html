@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02 Other Input Bindings</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+    <body>
+        
+        <label>Check Me</label>
+        <input type="checkbox" data-bind="checked:checkedBinding"/>
+        <div>
+            Above Is Checked : <span data-bind="text:checkedBinding"></span>
+        </div>
+        <hr/>
+        <input type="text" data-bind="hasFocus:focusedBinding"/> 
+        <div>
+             Above Is Focused : <span data-bind="text:focusedBinding"></span>
+        </div>
+
+        <script src="/shared/knockout-3.1.0.js"></script>
+        <script>
+            var ViewModel = function () {
+                var self = this;
+
+                self.checkedBinding = ko.observable(false);
+                self.focusedBinding = ko.observable(false);
+
+                return self;
+            };
+
+            ko.applyBindings(new ViewModel());
+        </script>
+
+
+
+    </body>
+</html>
