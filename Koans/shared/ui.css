@@ -1,0 +1,107 @@
+﻿html {
+    background: #000;
+    background-image: url('ko-logo.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    margin: 5px;
+    -webkit-animation: bounceLogo1 1s, bounceLogo2 0.5s;
+    -moz-animation: bounceLogo1 1s, bounceLogo2 0.5s;
+    -ms-animation: bounceLogo1 1s, bounceLogo2 0.5s;
+    -o-animation: bounceLogo1 1s, bounceLogo2 0.5s;
+    animation: bounceLogo1 1s, bounceLogo2 0.5s;
+    
+    -webkit-animation-delay: 0s, 1s;
+    -moz-animation-delay: 0s, 1s;
+    -ms-animation-delay: 0s, 1s;
+    -o-animation-delay: 0s, 1s;
+    animation-delay: 0s, 1s;
+}
+
+body {
+    background: #fff;
+    position: absolute;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    top: 100px;
+    box-shadow: 2px 2px 0 #808080;
+    border-top: solid 25px #808080;
+
+    overflow: auto;
+
+    -webkit-animation: openWindow1 1s, openWindow2 0.5s;
+    -moz-animation: openWindow1 1s, openWindow2 0.5s;
+    -ms-animation: openWindow1 1s, openWindow2 0.5s;
+    -o-animation: openWindow1 1s, openWindow2 0.5s;
+    animation: openWindow1 1s, openWindow2 0.5s;
+
+    -webkit-animation-delay: 0s, 1s;
+    -moz-animation-delay: 0s, 1s;
+    -ms-animation-delay: 0s, 1s;
+    -o-animation-delay: 0s, 1s;
+    animation-delay: 0s, 1s;
+}
+
+@keyframes bounceLogo1 {
+    from { background-position: 2000px 0; }
+    to {background-position: -25px 0;}
+}
+
+@-webkit-keyframes bounceLogo1 {
+    from { background-position: 2000px 0; }
+    to {background-position: -25px 0;}
+}
+
+@-moz-keyframes bounceLogo1 {
+    from { background-position: 2000px 0; }
+    to {background-position: -25px 0;}
+}
+
+@keyframes bounceLogo2 {
+    from { background-position: -25px 0; }
+    to {background-position: 0 0;}
+}
+
+@-webkit-keyframes bounceLogo2 {
+    from { background-position: -25px 0; }
+    to {background-position: 0 0;}
+}
+
+@-moz-keyframes bounceLogo2 {
+    from { background-position: -25px 0; }
+    to {background-position: 0 0;}
+}
+
+
+
+@keyframes openWindow1 {
+    from { bottom: 1000px;}
+    to { bottom: 0;}
+}
+
+@-webkit-keyframes openWindow1 {
+    from { bottom: 1000px;}
+    to { bottom: 0;}
+}
+
+@-moz-keyframes openWindow1 {
+    from { bottom: 1000px;}
+    to { bottom: 0;}
+}
+
+@keyframes openWindow2 {
+    from { bottom: 0;}
+    to { bottom: 25px;}
+}
+
+@-webkit-keyframes openWindow2 {
+    from { bottom: 0;}
+    to { bottom: 25px;}
+}
+
+@-moz-keyframes openWindow2 {
+    from { bottom: 0;}
+    to { bottom: 25px;}
+}
+
+
