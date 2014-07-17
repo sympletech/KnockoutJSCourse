@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02 Submit Bindings</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+    <body>
+        
+        <form data-bind="submit : attemptLogin">
+            <div>
+                <label>Username</label>
+                <input type="text" data-bind="value:username" />
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" data-bind="value:password" />
+            </div>
+            <div data-bind="html:message"></div>
+            <input type="submit" value="Submit" />
+            
+        </form>
+
+
+        <script src="/shared/knockout-3.1.0.js"></script>
+        <script>
+            var ViewModel = function () {
+                var self = this;
+
+                self.username = ko.observable();
+                self.password = ko.observable();
+                self.message = ko.observable("Please Log In");
+
+                self.attemptLogin = function () {
+                    if (self.username() == "knock" && self.password() == "out") {
+                        self.message("Success!");
+                    } else {
+                        self.message("Failure!");
+                    }
+                };
+
+                return self;
+            };
+
+            ko.applyBindings(new ViewModel());
+        </script>
+
+
+
+    </body>
+</html>
