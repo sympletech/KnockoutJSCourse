@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+    
+    <style type="text/css">
+        .hoverBox {
+            border: solid 1px #c9c9c9;
+            padding: 100px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .hoverBox:hover {
+            background: #288eff;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="hoverBox" data-bind="text:boxText, event:{mouseover:changeToHoverMode, mouseout:changeToNonHoverMode}">
+
+    </div>
+
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.boxText = ko.observable("Please Hover Over Me");
+
+            self.changeToHoverMode = function () {
+                self.boxText("Ewww get your mouse off of me!");
+            };
+            
+            self.changeToNonHoverMode = function () {
+                self.boxText("Please Hover Over Me");
+            };
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>
