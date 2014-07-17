@@ -45,7 +45,7 @@ body {
     animation-delay: 0s, 1s;
 }
 
-input, select {
+input, select, button {
     font-size: 1em;
     padding: 10px;
 }

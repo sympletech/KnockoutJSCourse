@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>04 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+    
+    <style type="text/css">
+        .hoverBox {
+            border: solid 1px #c9c9c9;
+            padding: 100px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+            .hoverBox:hover {
+                background: #288eff;
+            }
+            #submitBtn {
+                display: none;
+            }
+    </style>
+
+
+
+</head>
+<body>
+
+    <form id="funnyForm">
+        <label>Enter A Clown Name</label>
+        <input type="text" data-bind="value:clownName" />
+        <button data-bind="click:validateClownName">Validate Clown Name</button>
+        
+        <div class="hoverBox" data-bind="html:hoverBoxMessage, event:{mouseover:determineSubmitButtonVisibility}"></div>
+
+        <input data-bind="visible:showSubmitButton" type="submit" value="Submit" />
+
+    </form>
+    
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.clownName = ko.observable();
+            self.hoverBoxMessage = ko.observable("Enter A Clown Name");
+            
+            self.isClownNameValid = ko.observable(false);
+            self.showSubmitButton = ko.observable(false);
+
+            self.validateClownName = function () {
+                self.isClownNameValid(self.clownName() == "Boso");
+                self.hoverBoxMessage(self.isClownNameValid() ? "Boso The Clown You Say." : "Who?  There's Only one Clown I know of.");
+            };
+
+            self.determineSubmitButtonVisibility = function () {
+                self.showSubmitButton(self.isClownNameValid());
+            };
+
+            self.submitFunnyForm = function () {
+                self.hoverBoxMessage("It's in the books.  Boso the Clown Lives.");
+            };
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>    
+
+</body>
+</html>

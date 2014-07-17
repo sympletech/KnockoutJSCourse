@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>04 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+    
+    <style type="text/css">
+        .hoverBox {
+            border: solid 1px #c9c9c9;
+            padding: 100px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+            .hoverBox:hover {
+                background: #288eff;
+            }
+            #submitBtn {
+                display: none;
+            }
+    </style>
+
+
+
+</head>
+<body>
+
+    <form id="funnyForm">
+        <label>Enter A Clown Name</label>
+        <input type="text" id="clownName"/>
+        <button id="btnValidateClownName">Validate Clown Name</button>
+        
+        <div class="hoverBox">Enter A Clown Name</div>
+
+        <input id="submitBtn" type="submit" value="Submit"/>
+
+    </form>
+
+    <script src="/shared/jquery-1.11.0.min.js"></script>
+    <script>
+        var isValid = false;
+        $("#btnValidateClownName").on('click', function (e) {
+            e.preventDefault();
+
+            isValid = $("#clownName").val() == "Boso";
+            $(".hoverBox").html(isValid ? "Boso The Clown You Say." : "Who?  There's Only one Clown I know of.");
+        });
+
+        $(".hoverBox").on('mouseover', function () {
+            if (isValid) {
+                $("#submitBtn").show();
+            }
+        });
+
+        $("#funnyForm").on('submit', function (e) {
+            e.preventDefault();
+            $(".hoverBox").html("It's in the books.  Boso the Clown Lives.");
+        });
+    </script>
+</body>
+</html>
