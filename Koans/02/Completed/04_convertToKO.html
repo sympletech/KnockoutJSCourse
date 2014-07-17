@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>04 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+
+    <label>Enter Some Text</label> <input type="text" data-bind="value:inputBoxBinding, hasFocus:inputBoxFocus" />
+    <div>
+        <label>Input Box Value : </label> <span data-bind="text:inputBoxBinding"></span> <br />
+        <label>Input Box Has Focus : </label> <span data-bind="text:inputBoxFocus"></span>
+    </div>
+    
+    <label>Select A Choice</label> <select data-bind="options:selectListChoices, value:selectListValue"></select>
+    <div>
+        <label>Select Value : </label> <span data-bind="text:selectListValue, style:{color:selectListValue}"></span>
+    </div>
+
+    <script src="../../shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.inputBoxBinding = ko.observable();
+            self.inputBoxFocus = ko.observable(false);
+
+            self.selectListChoices = ko.observableArray(["Red", "Green", "Blue"]);
+            self.selectListValue = ko.observable();
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>04 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+
+    <label>Enter Some Text</label> <input id="inputBox" type="text" />
+    <div>
+        <label>Input Box Value : </label> <span id="inputBoxValue"></span> <br />
+        <label>Input Box Has Focus : </label> <span id="inputBoxFocus"></span> <br />
+    </div>
+    
+    <label>Select A Choice</label> <select id="selectBox"></select>
+    <div>
+        <label>Select Value : </label> <span id="selectListValue"></span> <br />
+    </div>
+
+
+    <script src="/shared/jquery-1.11.0.min.js"></script>
+    <script>
+        $("#inputBox").on("change", function (e) {
+            $("#inputBoxValue").html($("#inputBox").val());
+        });
+        
+        $("#inputBox").focusin(function (e) {
+            $("#inputBoxFocus").html("true");
+        });
+
+        $("#inputBox").focusout(function (e) {
+            $("#inputBoxFocus").html("false");
+        });
+
+        $("#selectBox").append("<option>Red</option>");
+        $("#selectBox").append("<option>Green</option>");
+        $("#selectBox").append("<option>Blue</option>");
+
+        $("#selectListValue").html("Red");
+        $("#selectListValue").css("color", "Red");
+
+        $("#selectBox").on('change', function () {
+            $("#selectListValue").html($("#selectBox").val());
+            $("#selectListValue").css("color", $("#selectBox").val());
+        });
+
+    </script>
+</body>
+</html>
