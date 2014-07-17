@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01 Click Bindings</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    <input type="text" data-bind="value:value1" /> + 
+    <input type="text" data-bind="value:value2" /> =
+    <span data-bind="text:sum"></span>
+    
+    <br/>
+    <button data-bind="click:addValues">Add Values</button>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.value1 = ko.observable();
+            self.value2 = ko.observable();
+            self.sum = ko.observable();
+
+            self.addValues = function () {
+                var val1 = parseInt(self.value1());
+                var val2 = parseInt(self.value1());
+                self.sum(val1 + val2);
+            };
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>
