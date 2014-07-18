@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02 Multiple Subscribe</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    <label>Perform Calculation</label>
+
+    <input type="text" data-bind="value:value1" />
+    <select data-bind="value:operator, options:operatorChoices"></select>
+    <input type="text" data-bind="value:value2" />
+    = <b data-bind="html:solution"></b>
+
+
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.value1 = ko.observable();
+            self.operator = ko.observable();
+            self.value2 = ko.observable();
+            self.solution = ko.observable();
+
+            self.operatorChoices = ko.observableArray(['+', '-', '*','/']);
+
+            function performCalculation() {
+                var val1 = parseFloat(self.value1());
+                var val2 = parseFloat(self.value2());
+
+                var result = eval(val1 + self.operator() + val2);
+                self.___(result);
+            }
+
+            self.value1.subscribe(___);
+            self.operator.subscribe(___);
+            self.value2.subscribe(___);
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+
+</html>

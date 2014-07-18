@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01 Subscribe</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <select data-bind="value:selectedColor, options:colorOptions"></select>
+    
+    <div data-bind="html:message, style: {color : selectedColor}"></div>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.message = ko.observable();
+
+            self.colorOptions = ko.observableArray(['Red', 'Blue', 'Green']);
+
+            self.selectedColor = ko.observable();
+            self.selectedColor.___(function () {
+                switch (self.selectedColor()) {
+                    case 'Red':
+                        self.message("Bulls Like to Charge Red Things.");
+                        break;
+                    case 'Blue':
+                        self.message("The Sky is Blue.");
+                        break;
+                    case 'Green':
+                        self.message("The Grass is Green.");
+                        break;
+                default:
+                }
+                
+            });
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>

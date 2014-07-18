@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>03 Convert to KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    <h3>Match the Manufacturer to the Model</h3>
+    <select data-bind="value:selectedManufacturer, options:manufacturerChoices"></select>
+    <select data-bind="value:selectedModel, options:modelChoices"></select>
+
+    <div>
+        <label>Match Status :</label> <b data-bind="html:matchStatus"></b>
+    </div>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.selectedManufacturer = ko.observable();
+            self.selectedModel = ko.observable();
+            self.matchStatus = ko.observable();
+
+            self.manufacturerChoices = ko.observableArray();
+            self.modelChoices = ko.observableArray();
+
+            var cars = [
+                ['Ford', 'Mustang'],
+                ['Chevy', 'Volt'],
+                ['Dodge', 'Dart']
+            ];
+
+            for (var i = 0; i < cars.length; i++) {
+                var car = cars[i];
+                self.manufacturerChoices.push(car[0]);
+                self.modelChoices.push(car[1]);
+            }
+            
+            function isAMatch() {
+                var match = cars.filter(function (car) {
+                    return car[0] == self.selectedManufacturer() && car[1] == self.selectedModel();
+                });
+                if (match.length > 0) {
+                    self.matchStatus("You have a match");
+                } else {
+                    self.matchStatus("Not a match");
+                }
+            }
+
+            self.selectedManufacturer.subscribe(isAMatch);
+            self.selectedModel.subscribe(isAMatch);
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>03 Convert to KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    <h3>Match the Manufacturer to the Model</h3>
+    <select id="manufacturers"></select>
+    <select id="models"></select>
+    
+    <div>
+        <label>Match Status :</label> <b id="matchStatus"></b>
+    </div>
+
+
+    <script src="/shared/jquery-1.11.0.min.js"></script>
+    <script>
+        var cars = [
+            ['Ford', 'Mustang'],
+            ['Chevy', 'Volt'],
+            ['Dodge', 'Dart']
+        ];
+
+        for (var i = 0; i < cars.length; i++) {
+            var car = cars[i];
+            $("#manufacturers").append('<option>' + car[0] + '</option>');
+            $("#models").append('<option>' + car[1] + '</option>');
+        }
+
+        function isAMatch() {
+            var manf = $("#manufacturers").val();
+            var model = $("#models").val();
+            var match = cars.filter(function (car) {
+                return car[0] == manf && car[1] == model;
+            });
+            if (match.length > 0) {
+                $("#matchStatus").html("You have a match");
+            } else {
+                $("#matchStatus").html("Not a match");
+            }
+        }
+
+        $("#manufacturers").on('change', isAMatch);
+        $("#models").on('change', isAMatch);
+
+    </script>
+</body>
+</html>
