@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>04 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+    <style type="text/css">
+        .grid-entry {
+            border: solid 1px black;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .grid-options {
+            float: right;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div data-bind="foreach:people">
+        <div class="grid-entry">
+            <span data-bind="html:lastName"></span>, <span data-bind="html:firstName"></span>
+            <div class="grid-options">
+                <a data-bind="click:$parent.editItem">Edit</a>
+                <a data-bind="click:$parent.removeItem">Remove</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <div>
+        <label>First Name</label> <input type="text" data-bind="value:firstNameInput" />
+    </div>
+    <div>
+        <label>Last Name</label> <input type="text" data-bind="value:lastNameInput" />
+    </div>
+    
+    <button data-bind="click:submitItem">Submit</button>
+    
+    
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.firstNameInput = ko.observable();
+            self.lastNameInput = ko.observable();
+            
+            self.people = ko.observableArray();
+
+            var newItem = true,
+                existingId;
+
+            self.submitItem = function () {
+                
+                var personDetails = {
+                    firstName: self.firstNameInput(),
+                    lastName: self.lastNameInput()
+                };
+
+                if (newItem == true) {
+                    self.people.push(personDetails);
+                } else {
+                    self.people()[existingId] = personDetails;
+                    self.people(self.people());
+                }
+                self.firstNameInput("");
+                self.lastNameInput("");
+                newItem = true;
+            };
+
+            self.removeItem = function (item) {
+                self.people.remove(item);
+            };
+
+            self.editItem = function (item) {
+                existingId = self.people.indexOf(item);
+                newItem = false;
+                self.firstNameInput(item.firstName);
+                self.lastNameInput(item.lastName);
+            };
+
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>

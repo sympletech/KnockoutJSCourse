@@ -52,6 +52,7 @@ input, select, button {
 
 a {
     cursor: pointer;
+    padding: 3px;
 }
 
 a:hover {

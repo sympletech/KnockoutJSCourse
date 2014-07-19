@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>04 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+    <style type="text/css">
+        .grid-entry {
+            border: solid 1px black;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .grid-options {
+            float: right;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="people-list"></div>
+    
+
+    <div>
+        <label>First Name</label> <input type="text" id="inputFirstName"/>
+    </div>
+    <div>
+        <label>Last Name</label> <input type="text" id="inputLastName" />
+    </div>
+    
+    <button id="submit-button">Submit</button>
+
+    <script src="/shared/jquery-1.11.0.min.js"></script>
+    <script>
+        var people = [],
+            newItem = true,
+            existingId;
+        
+        $('#submit-button').on('click', function (e) {
+            e.preventDefault();
+            
+            var personDetails = {
+                firstName : $("#inputFirstName").val(),
+                lastName: $("#inputLastName").val()
+            };
+
+            if (newItem == true) {
+
+                people.push(personDetails);
+            } else {
+                people[existingId] = personDetails;
+            }
+            
+            drawPeopleGrid();
+
+            $("#inputFirstName").val("");
+            $("#inputLastName").val("");
+            newItem = true;
+        });
+
+        function drawPeopleGrid() {
+            var gridHtml = '';
+            for (var i = 0; i < people.length; i++) {
+                var person = people[i];
+                gridHtml += '<div class="grid-entry">';
+                gridHtml += person.lastName + ', ' + person.firstName;
+                gridHtml += '<div class="grid-options">';
+                gridHtml += '<a onclick="editPerson('+ i +')">Edit</a>';
+                gridHtml += '<a onclick="removePerson(' + i + ')">Remove</a>';
+                gridHtml += '</div>';
+                gridHtml += '</div>';
+            }
+            $("#people-list").html(gridHtml);
+        }
+
+        function editPerson(id) {
+            var person = people[id];
+            
+            existingId = id;
+            newItem = false;
+
+            $("#inputFirstName").val(person.firstName);
+            $("#inputLastName").val(person.lastName);
+        }
+
+        function removePerson(id) {
+            people.splice(id, 1);
+            drawPeopleGrid();
+        }
+    </script>
+</body>
+</html>
