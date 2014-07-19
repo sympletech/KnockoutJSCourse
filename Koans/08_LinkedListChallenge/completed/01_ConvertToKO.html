@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+
+    <label>Select A Car</label>
+    <select data-bind="options:manufacturers, value:selectedManufacturer"></select>
+    <select data-bind="options:makes, value:selectedMake"></select>
+    <select data-bind="options:models, value:selectedModel"></select>
+
+
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script src="/shared/underscore-min.js"></script>
+
+    <script>
+        var cars = [
+            { manufacturer: 'Ford', make: 'Mustang', model: 'GT' },
+            { manufacturer: 'Ford', make: 'Mustang', model: '5.0' },
+            { manufacturer: 'Ford', make: 'Focus', model: 'Sport' },
+            { manufacturer: 'Ford', make: 'Focus', model: 'Rally Sport' },
+            { manufacturer: 'Chevy', make: 'Corvette', model: 'Base' },
+            { manufacturer: 'Chevy', make: 'Corvette', model: 'ZR1' },
+            { manufacturer: 'Chevy', make: 'Corvette', model: 'Z06' },
+            { manufacturer: 'Chevy', make: 'Camaro', model: '6Cyl' },
+            { manufacturer: 'Chevy', make: 'Camaro', model: '8Cyl' }
+        ];
+
+
+        var ViewModel = function () {
+            var self = this;
+
+            self.manufacturers = ko.observableArray();
+            self.makes = ko.observableArray();
+            self.models = ko.observableArray();
+
+            self.selectedManufacturer = ko.observable();
+            self.selectedMake = ko.observable();
+            self.selectedModel = ko.observable();
+
+            self.selectedManufacturer.subscribe(function() {
+                var manfCars = _.where(cars, { manufacturer: self.selectedManufacturer() });
+
+                var makeList = _.uniq(
+                    _.map(manfCars, function (car) {
+                        return car.make;
+                    })
+                );
+
+                self.makes(makeList);
+            });
+
+            self.selectedMake.subscribe(function() {
+                var makeCars = _.where(cars, { manufacturer: self.selectedManufacturer(), make: self.selectedMake() });
+
+                var modelList = _.uniq(
+                    _.map(makeCars, function (car) {
+                        return car.model;
+                    })
+                );
+
+                self.models(modelList);
+            });
+
+            self.init = (function() {
+
+                var manfList = _.uniq(
+                    _.map(cars, function(car) {
+                        return car.manufacturer;
+                    })
+                );
+                self.manufacturers(manfList);
+
+            })();
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>

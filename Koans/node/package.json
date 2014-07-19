@@ -1,0 +1,8 @@
+﻿{
+  "name": "knockout-rest-server",
+  "version": "0.0.1",
+  "dependencies": {
+	"restify" : "*",
+	"underscore" : "*"
+  }
+}
