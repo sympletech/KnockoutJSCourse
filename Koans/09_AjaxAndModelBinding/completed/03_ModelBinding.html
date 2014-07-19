@@ -1,9 +1,10 @@
 ﻿<!--Start Node Server in Node folder before completeing this excersise-->
+<!--KO Viewmodel Info : http://coderenaissance.github.io/knockout.viewmodel/-->
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>02 Adding A Form</title>
+    <title>03 Model Binding</title>
     <link href="/shared/ui.css" rel="stylesheet" />
     <style type="text/css">
         label {
@@ -29,27 +30,28 @@
                 <td data-bind="html:make"></td>
                 <td data-bind="html:model"></td>
                 <td>
-                    <a data-bind="click:$parent.___">Edit</a> |
-                    <a data-bind="click:$parent.___">Delete</a>
+                    <a data-bind="click:$parent.editCar">Edit</a> |
+                    <a data-bind="click:$parent.deleteCar">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    
-    <div data-bind="___:carForm">
+
+    <div data-bind="with:carForm">
         <h3 data-bind="html:$parent.formHeading"></h3>
-        
-        <label>Manufacturer</label> <input type="text" data-bind="value:manufacturer" /><br/>
-        <label>Make</label> <input type="text" data-bind="value:make" /><br/>
-        <label>Model</label> <input type="text" data-bind="value:model" /><br/>
-        
-        <button data-bind="click:$parent.___">Reset Form</button>
-        <button data-bind="click:$parent.___">Submit</button>
+
+        <label>Manufacturer</label> <input type="text" data-bind="value:manufacturer" /><br />
+        <label>Make</label> <input type="text" data-bind="value:make" /><br />
+        <label>Model</label> <input type="text" data-bind="value:model" /><br />
+
+        <button data-bind="click:$parent.resetForm">Reset Form</button>
+        <button data-bind="click:$parent.submitForm">Submit</button>
 
     </div>
 
     <script src="/shared/jquery-1.11.0.min.js"></script>
     <script src="/shared/knockout-3.1.0.js"></script>
+    <script src="/shared/knockout.viewmodel.min.js"></script>
     <script>
         var ViewModel = function () {
             var self = this;
@@ -66,38 +68,28 @@
 
             self.formHeading = ko.observable();
 
-            self.carForm = {
-                id: ko.___(),
-                manufacturer : ko.___(),
-                make : ko.___(),
-                model : ko.___()
-            };
+            self.carForm = ko.observable();
 
             self.resetForm = function() {
                 self.formHeading("Add New Car");
-                self.carForm.id(null);
-                self.carForm.manufacturer(null);
-                self.carForm.make(null);
-                self.carForm.model(null);
+                self.carForm(ko.viewmodel.fromModel({
+                    id: null,
+                    manufacturer: null,
+                    make: null,
+                    model: null
+                }));
             };
             self.resetForm();
 
             self.editCar = function(car) {
                 self.formHeading("Edit Car");
-                self.carForm.id(car.___);
-                self.carForm.manufacturer(car.___);
-                self.carForm.make(car.___);
-                self.carForm.model(car.___);
+                self.carForm(ko.viewmodel.fromModel(car));
             };
 
             self.submitForm = function() {
-                var payload = {
-                    manufacturer: self.carForm.manufacturer(),
-                    make: self.carForm.make(),
-                    model: self.carForm.model()
-                };
+                var payload = ko.viewmodel.toModel(self.carForm());
 
-                $.post('http://localhost:8080/cars', { payload: JSON.stringify(___) }, function(data) {
+                $.post('http://localhost:8080/cars', { payload: JSON.stringify(payload) }, function(data) {
                     self.loadCars();
                     self.resetForm();
                 });

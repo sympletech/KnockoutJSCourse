@@ -34,7 +34,7 @@ server.post('/cars', function(req, res) {
     var carToSave = JSON.parse(req.params.payload);
 
     var existing = _.find(cars, function(car) {
-        return car._id == carToSave.id;
+        return car.id == carToSave.id;
     });
 
     if (existing != null) {
