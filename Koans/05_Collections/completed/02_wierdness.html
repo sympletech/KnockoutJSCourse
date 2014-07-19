@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <div data-bind="foreach:observableCollection">
+        <div data-bind="html:$data"></div>
+    </div>
+    
+    <label>Item To Add </label>
+    <input type="text" data-bind="value:newItem" />
+
+    <button data-bind="click:addNewItem">Add Item</button>
+    <button data-bind="click:removeItem">Remove Item</button>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.observableCollection = ko.observableArray();
+
+            self.newItem = ko.observable();
+
+            self.addNewItem = function () {
+                self.observableCollection.push(self.newItem());
+            };
+
+            self.removeItem = function () {
+                self.observableCollection.pop();
+            };
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>

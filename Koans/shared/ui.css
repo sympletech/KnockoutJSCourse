@@ -50,6 +50,14 @@ input, select, button {
     padding: 10px;
 }
 
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 /********************************
     Animations
 ********************************/

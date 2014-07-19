@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>03 Items In Collections</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+    <style type="text/css">
+        .grid-entry {
+            border: solid 1px black;
+            width: 50%;
+            padding: 10px;
+        }
+        .grid-options {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div data-bind="foreach:___">
+        <div class="grid-entry">
+            <span data-bind="html:$data"></span>
+            <div class="grid-options">
+                <a data-bind="click:___">Edit</a>
+                <a data-bind="click:___">Remove</a>
+            </div>
+        </div>
+    </div>
+
+    <label>Item To Add </label>
+    <input type="text" data-bind="value:itemInput" />
+
+    <button data-bind="click:submitItem">Submit</button>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.observableCollection = ko.observableArray();
+
+            self.itemInput = ko.observable();
+            var newItem = true,
+                existingId;
+
+            self.submitItem = function () {
+                if (newItem == true) {
+                    self.observableCollection.push(self.itemInput());
+                } else {
+                    self.observableCollection()[existingId] = self.itemInput();
+                    self.observableCollection(self.observableCollection());
+                }
+                self.itemInput("");
+                newItem = true;
+            };
+
+            self.removeItem = function (item) {
+                self.observableCollection.remove(item);
+            };
+
+            self.editItem = function (item) {
+                existingId = self.observableCollection.indexOf(item);
+                newItem = false;
+                self.itemInput(item);
+            };
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>
