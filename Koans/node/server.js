@@ -2,6 +2,10 @@
     _ = require('underscore');
 
 var server = restify.createServer();
+server.use(restify.fullResponse());
+server.use(restify.bodyParser());
+server.use(restify.gzipResponse());
+
 
 var cars = [
     { id: 1, manufacturer: 'Ford', make: 'Mustang', model: 'GT' },

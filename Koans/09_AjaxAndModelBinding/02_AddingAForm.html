@@ -7,7 +7,7 @@
     <link href="/shared/ui.css" rel="stylesheet" />
 </head>
 <body>
-    
+
     <table>
         <thead>
             <tr>
@@ -24,6 +24,8 @@
             </tr>
         </tbody>
     </table>
+    
+
 
     <script src="/shared/jquery-1.11.0.min.js"></script>
     <script src="/shared/knockout-3.1.0.js"></script>
@@ -34,8 +36,8 @@
             self.cars = ko.observableArray();
 
             self.loadCars = function() {
-                $.___('http://localhost:8080/cars', function(data) {
-                    self.cars(___);
+                $.get('http://localhost:8080/cars', function(data) {
+                    self.cars(data);
                 });
             }
 
@@ -48,6 +50,14 @@
     </script>
 
 
+
+</body>
+</html><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
 
 </body>
 </html>

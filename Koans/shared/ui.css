@@ -59,6 +59,11 @@ a:hover {
     text-decoration: underline;
 }
 
+tr,td {
+    text-align: left;
+    padding: 5px;
+}
+
 /********************************
     Animations
 ********************************/

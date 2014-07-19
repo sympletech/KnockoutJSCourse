@@ -34,8 +34,8 @@
             self.cars = ko.observableArray();
 
             self.loadCars = function() {
-                $.___('http://localhost:8080/cars', function(data) {
-                    self.cars(___);
+                $.get('http://localhost:8080/cars', function(data) {
+                    self.cars(data);
                 });
             }
 
