@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01 Convert To KO</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+
+    <label>Select A Car</label>
+    <select id="Manufacturer"></select>
+    <select id="Make"></select>
+    <select id="Model"></select>
+
+
+    <script src="/shared/jquery-1.11.0.min.js"></script>
+    <script src="/shared/underscore-min.js"></script>
+
+    <script>
+
+        function fillSelectList(target, array) {
+            $(target).html('');
+            _.each(array, function (item) {
+                $(target).append('<option>' + item + '</option');
+            });
+        }
+
+        var cars = [
+            { manufacturer: 'Ford', make: 'Mustang', model: 'GT' },
+            { manufacturer: 'Ford', make: 'Mustang', model: '5.0' },
+            { manufacturer: 'Ford', make: 'Focus', model: 'Sport' },
+            { manufacturer: 'Ford', make: 'Focus', model: 'Rally Sport' },
+            { manufacturer: 'Chevy', make: 'Corvette', model: 'Base' },
+            { manufacturer: 'Chevy', make: 'Corvette', model: 'ZR1' },
+            { manufacturer: 'Chevy', make: 'Corvette', model: 'Z06' },
+            { manufacturer: 'Chevy', make: 'Camaro', model: '6Cyl' },
+            { manufacturer: 'Chevy', make: 'Camaro', model: '8Cyl' }
+        ];
+
+        function fillManfList() {
+            var manfList = _.uniq(
+                _.map(cars, function (car) {
+                    return car.manufacturer;
+                })
+            );
+            fillSelectList('#Manufacturer', manfList);
+        }
+
+        function fillMakeList() {
+            var manf = $('#Manufacturer').val();
+            
+            var manfCars = _.where(cars, { manufacturer: manf });
+
+            var makeList = _.uniq(
+                _.map(manfCars, function (car) {
+                    return car.make;
+                })
+            );
+
+            fillSelectList('#Make', makeList);
+        }
+
+        function fillModelList() {
+            var manf = $('#Manufacturer').val();
+            var make = $('#Make').val();
+
+            var makeCars = _.where(cars, { manufacturer: manf, make: make });
+
+            var modelList = _.uniq(
+                _.map(makeCars, function (car) {
+                    return car.model;
+                })
+            );
+
+            fillSelectList('#Model', modelList);
+        }
+
+        $('#Manufacturer').on('change', function () {
+            fillMakeList();
+            fillModelList();
+        });
+
+        $('#Make').on('change', function () {
+            fillModelList();
+        });
+
+
+        fillManfList();
+        fillMakeList();
+        fillModelList();
+
+    </script>
+</body>
+</html>
