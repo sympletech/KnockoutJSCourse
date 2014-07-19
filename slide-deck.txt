@@ -1,0 +1,4 @@
+Slide Deck:
+Personal Bio
+Introduction To Knockout JS
+(K01) Binding Properties and Attributes 
