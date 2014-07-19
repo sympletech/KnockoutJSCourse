@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02 Dynamic Template</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    <div data-bind="template : {name : dynamicTemplate}"></div>
+    
+    <select data-bind="options:templateChoices, value:dynamicTemplate"></select>
+
+    <script type="text/html" id="happyTemplate">
+        <p>Today I am so happy I could just hug a <span data-bind="html:thing"></span></p>
+        <p>I love all the people who live in this <span data-bind="html:place"></span></p>
+    </script>
+    
+    <script type="text/html" id="angryTemplate">
+        <p>Every time I look out my window and see that <span data-bind="html:thing"></span></p>
+        <p>It makes me want to burn down this entire <span data-bind="html:place"></span></p>
+    </script>
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+            self.thing = "Tree";
+            self.place = "Forest";
+
+            self.templateChoices = ['happyTemplate', 'angryTemplate'];
+
+            self.dynamicTemplate = ko.observable('happyTemplate');
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>

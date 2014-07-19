@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>01 Basic Template</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <div data-bind="___:{name : 'simpleTemplate', data : {templateType : 'KO'}}"></div>
+    
+    
+    <script type="text/html" id="simpleTemplate">
+        <h3>Knockout Template</h3>
+        <p>This is a basic <b data-bind="html:templateType"></b> Template</p>
+    </script>
+
+
+    <script src="/shared/knockout-3.1.0.js"></script>
+    <script>
+        var ViewModel = function () {
+            var self = this;
+
+
+
+            return self;
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+
+
+
+</body>
+</html>
