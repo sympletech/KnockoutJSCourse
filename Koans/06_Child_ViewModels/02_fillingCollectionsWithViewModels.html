@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>02 Filling Collections With View Models</title>
+    <link href="/shared/ui.css" rel="stylesheet" />
+</head>
+    <body>
+        
+        <ul data-bind="foreach:observableCollection">
+            <li> <input type="text" data-bind="value:name"/> <b data-bind="html : name"></b> </li>
+        </ul>
+        
+        <button data-bind="click:addItem">Add New Item</button>
+
+        <script src="/shared/knockout-3.1.0.js"></script>
+        <script>
+            var ViewModel = function () {
+                var self = this;
+
+                self.observableCollection = ko.observableArray();
+                self.addItem = function() {
+                    self.observableCollection.push(___);
+                };
+
+                return self;
+            };
+
+            var collectionItemViewModel = function() {
+                var self = this;
+
+                self.name = ko.observableArray();
+
+                return self;
+            };
+
+            ko.applyBindings(new ViewModel());
+        </script>
+
+
+
+    </body>
+</html>
