@@ -48,7 +48,7 @@ server.post('/cars', function(req, res) {
     }
 });
 
-server.del('/cars/:id', function (req, res) {
+server.get('/deletecar/:id', function (req, res) {
     cars = _.reject(cars, function (car) {
         return car.id == req.params.id;
     });

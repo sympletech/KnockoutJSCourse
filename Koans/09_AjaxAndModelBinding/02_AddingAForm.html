@@ -5,6 +5,12 @@
 <head>
     <title>01 Calling Services</title>
     <link href="/shared/ui.css" rel="stylesheet" />
+    <style type="text/css">
+        label {
+            width: 250px;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,6 +20,7 @@
                 <th>Manufacturer</th>
                 <th>Make</th>
                 <th>Model</th>
+                <th></th>
             </tr>
         </thead>
         <tbody data-bind="foreach:cars">
@@ -21,11 +28,25 @@
                 <td data-bind="html:manufacturer"></td>
                 <td data-bind="html:make"></td>
                 <td data-bind="html:model"></td>
+                <td>
+                    <a data-bind="click:$parent.editCar">Edit</a> |
+                    <a data-bind="click:$parent.deleteCar">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>
     
+    <div data-bind="with:carForm">
+        <h3 data-bind="html:$parent.formHeading"></h3>
+        
+        <label>Manufacturer</label> <input type="text" data-bind="value:manufacturer" /><br/>
+        <label>Make</label> <input type="text" data-bind="value:make" /><br/>
+        <label>Model</label> <input type="text" data-bind="value:model" /><br/>
+        
+        <button data-bind="click:$parent.resetForm">Reset Form</button>
+        <button data-bind="click:$parent.submitForm">Submit</button>
 
+    </div>
 
     <script src="/shared/jquery-1.11.0.min.js"></script>
     <script src="/shared/knockout-3.1.0.js"></script>
@@ -42,6 +63,51 @@
             }
 
             self.loadCars();
+
+            self.formHeading = ko.observable();
+
+            self.carForm = {
+                id: ko.observable(),
+                manufacturer : ko.observable(),
+                make : ko.observable(),
+                model : ko.observable()
+            };
+
+            self.resetForm = function() {
+                self.formHeading("Add New Car");
+                self.carForm.id(null);
+                self.carForm.manufacturer(null);
+                self.carForm.make(null);
+                self.carForm.model(null);
+            };
+            self.resetForm();
+
+            self.editCar = function(car) {
+                self.formHeading("Edit Car");
+                self.carForm.id(car.id);
+                self.carForm.manufacturer(car.manufacturer);
+                self.carForm.make(car.make);
+                self.carForm.model(car.model);
+            };
+
+            self.submitForm = function() {
+                var payload = {
+                    manufacturer: self.carForm.manufacturer(),
+                    make: self.carForm.make(),
+                    model: self.carForm.model()
+                };
+
+                $.post('http://localhost:8080/cars', { payload: JSON.stringify(payload) }, function(data) {
+                    self.loadCars();
+                    self.resetForm();
+                });
+            };
+
+            self.deleteCar = function(car) {
+                $.get('http://localhost:8080/deletecar/' + car.id, function(data) {
+                    self.loadCars();
+                });
+            };
 
             return self;
         };
